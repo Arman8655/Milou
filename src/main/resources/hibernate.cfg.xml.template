@@ -20,5 +20,10 @@ YOUR_PASSWORD
 <property name="hibernate.show_sql">true</property>
 <property name="hibernate.format_sql">true</property>
 <property name="hibernate.highlight_sql">true</property>
+ <!-- Mappings -->
+        <mapping class="aut.ap.model.User"/>
+        <mapping class="aut.ap.model.Email"/>
+        <mapping class="aut.ap.model.EmailRecipient"/>
+
 </session-factory>
 </hibernate-configuration>
