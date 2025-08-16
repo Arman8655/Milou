@@ -17,7 +17,7 @@ YOUR_USERNAME
 <property name="hibernate.connection.password">
 YOUR_PASSWORD
 </property>
-<property name="hibernate.show_sql">true</property>
+<property name="hibernate.show_sql">false</property>
 <property name="hibernate.format_sql">true</property>
 <property name="hibernate.highlight_sql">true</property>
  <!-- Mappings -->
