@@ -15,7 +15,7 @@ public class EmailRecipientService {
 
 
         while (true) {
-            System.out.print("[S]end, [V]iew, [R]eply, [F]orward, [L]ogout: ");
+            System.out.print("[S]end, [V]iew, [R]eply, [F]orward, [D]elete, [L]ogout: ");
             String input = scanner.nextLine().trim().toLowerCase();
 
             if (input.equals("s")) {
@@ -29,6 +29,10 @@ public class EmailRecipientService {
             }
             else if (input.equals("f")) {
                 EmailService.forwardEmail(user);
+            }
+
+            else if (input.equals("d")){
+                EmailService.deleteEmail(user);
             }
 
             else if (input.equals("l")) {
