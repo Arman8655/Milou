@@ -184,6 +184,46 @@ public class EmailService {
         System.out.println();
     }
 
+    public static void deleteEmail(User user) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Code: ");
+        String code = scanner.nextLine().trim();
+
+        System.out.println();
+
+        Email email = EmailRecipientService.getEmailByCodeForUser(code, user);
+        if (email == null) {
+            System.out.println("You cannot delete this email.");
+            System.out.println();
+            return;
+        }
+
+        getSessionFactory().inTransaction(session -> {
+
+            boolean isSender = email.getSender().equals(user);
+
+            if (isSender) {
+
+                session.createMutationQuery("delete from EmailRecipient er where er.email = :email")
+                        .setParameter("email", email)
+                        .executeUpdate();
+                session.remove(email);
+                System.out.println("Successfully deleted email with code " + code + " for all users.");
+            }
+            else {
+
+                session.createMutationQuery("delete from EmailRecipient er where er.email = :email and er.receiver = :user")
+                        .setParameter("email", email)
+                        .setParameter("user", user)
+                        .executeUpdate();
+                System.out.println("Successfully deleted email with code " + code + " from your inbox.");
+            }
+        });
+
+        System.out.println();
+    }
+
     private static String generateRandomCode() {
         String characters = "abcdefghijklmnopqrstuvwxyz0123456789";
         Random random = new Random();
